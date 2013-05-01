@@ -1,0 +1,6 @@
+AzureBlobLease
+
+Simple Windows tool to manage Azure storage blobs and leases.
+
+- Works with page and block blobs.
+- Create and release leases on blobs.
