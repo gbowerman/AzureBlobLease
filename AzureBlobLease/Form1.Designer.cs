@@ -30,6 +30,7 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.storageTab = new System.Windows.Forms.TabPage();
+            this.breakLeaseButton = new System.Windows.Forms.Button();
             this.acquireLeaseButton = new System.Windows.Forms.Button();
             this.newContainerText = new System.Windows.Forms.TextBox();
             this.deleteBlobButton = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.accountText = new System.Windows.Forms.TextBox();
             this.accountLabel = new System.Windows.Forms.Label();
             this.storageLabel = new System.Windows.Forms.Label();
-            this.breakLeaseButton = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.storageTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
@@ -91,6 +91,18 @@
             this.storageTab.Size = new System.Drawing.Size(356, 245);
             this.storageTab.TabIndex = 0;
             this.storageTab.Text = "Storage";
+            // 
+            // breakLeaseButton
+            // 
+            this.breakLeaseButton.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.breakLeaseButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.breakLeaseButton.Location = new System.Drawing.Point(237, 134);
+            this.breakLeaseButton.Name = "breakLeaseButton";
+            this.breakLeaseButton.Size = new System.Drawing.Size(88, 20);
+            this.breakLeaseButton.TabIndex = 35;
+            this.breakLeaseButton.Text = "Break Lease";
+            this.breakLeaseButton.UseVisualStyleBackColor = false;
+            this.breakLeaseButton.Click += new System.EventHandler(this.breakLeaseButton_Click);
             // 
             // acquireLeaseButton
             // 
@@ -259,6 +271,7 @@
             this.accountList.Name = "accountList";
             this.accountList.Size = new System.Drawing.Size(122, 95);
             this.accountList.TabIndex = 13;
+            this.accountList.SelectedIndexChanged += new System.EventHandler(this.accountList_Click);
             this.accountList.SelectedValueChanged += new System.EventHandler(this.accountList_SelectedValueChanged);
             // 
             // saveStorageAccButton
@@ -324,18 +337,6 @@
             this.storageLabel.Size = new System.Drawing.Size(83, 13);
             this.storageLabel.TabIndex = 1;
             this.storageLabel.Text = "Storage Account";
-            // 
-            // breakLeaseButton
-            // 
-            this.breakLeaseButton.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.breakLeaseButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.breakLeaseButton.Location = new System.Drawing.Point(237, 134);
-            this.breakLeaseButton.Name = "breakLeaseButton";
-            this.breakLeaseButton.Size = new System.Drawing.Size(88, 20);
-            this.breakLeaseButton.TabIndex = 35;
-            this.breakLeaseButton.Text = "Break Lease";
-            this.breakLeaseButton.UseVisualStyleBackColor = false;
-            this.breakLeaseButton.Click += new System.EventHandler(this.breakLeaseButton_Click);
             // 
             // AzureBlob
             // 

@@ -220,6 +220,12 @@ namespace AzureBlobLease
             int index = accountList.FindStringExact(accountName);
             if (index != -1)
                 accountList.SetSelected(index, true);
+
+            // Update the current storage account name
+            storageAccNameLabel.Text = "- " + accountName;
+
+            // connect to the storage account
+            listContainers();
         }
 
         private void deleteBlobButton_Click(object sender, EventArgs e)
@@ -421,6 +427,22 @@ namespace AzureBlobLease
             {
                 MessageBox.Show("Error breaking lease: " + ex.ToString(), ex.GetType().FullName);
             }
+        }
+
+        private void accountList_Click(object sender, EventArgs e)
+        {
+            // connect to the highlighted storage account in the list
+            if (accountList.SelectedItem == null) return;
+
+            accountName = accountList.SelectedItem.ToString();
+            accountText.Text = accountName;
+            storageAccNameLabel.Text = "- " + accountName;
+            // update the key too in case someone clicks Save
+            int listIndex = accountList.SelectedIndex;
+            accountKey = keyList[listIndex];
+            keyText.Text = accountKey;
+            
+            listContainers();
         }
     }
 }
