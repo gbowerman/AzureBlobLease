@@ -10,8 +10,8 @@
  */
 
 using System;
-using System.ComponentModel;
-using System.Data;
+//using System.ComponentModel;
+//using System.Data;
 using System.Windows.Forms;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
@@ -19,10 +19,11 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Blob.Protocol;
 using Microsoft.WindowsAzure.Storage.Auth;
 using System.IO;
-using System.Text;
+//using System.Text;
 using System.Configuration;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+//using System.Collections.Specialized;
+
 
 namespace AzureBlobLease
 {
@@ -32,6 +33,7 @@ namespace AzureBlobLease
         String accountKey = null;
         CloudBlobClient blobClient = null;
         string containerName = null;
+        string policyName = null;
         string keyStoreDir = ".";
         string configFile = "AzureBlobLease.config";
         List<string> keyList = new List<string>();
@@ -129,8 +131,8 @@ namespace AzureBlobLease
                 Uri blobEndpoint = new Uri("https://" + accountName + ".blob.core.windows.net/");
 
                 // create storage account object and blob client
-                CloudStorageAccount storageAccount = 
-                    new CloudStorageAccount(new StorageCredentials(accountName, accountKey), true);
+                Microsoft.WindowsAzure.Storage.CloudStorageAccount storageAccount =
+                    new Microsoft.WindowsAzure.Storage.CloudStorageAccount(new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(accountName, accountKey), true);
                 blobClient = storageAccount.CreateCloudBlobClient();
             
                 //List all containers in this storage account.
@@ -152,19 +154,44 @@ namespace AzureBlobLease
                 containerList.SetSelected(0, true);
         }
 
+        // someone clicks on a container - list the blobs and policies for that container
         private void containerList_SelectedValueChanged(object sender, EventArgs e)
         {
+            listContainerPolicies();
             listBlobs();
         }
 
+        // Enumerate the policies associated with a selected container and populate the policies listbox
+        private void listContainerPolicies()
+        {
+            if (containerList.SelectedItem == null) return;
+            containerName = containerList.SelectedItem.ToString();
+
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+
+            // now list the policies for this container
+            policyList.Items.Clear();
+
+            BlobContainerPermissions containerPermissions = container.GetPermissions();
+            if (containerPermissions.SharedAccessPolicies.Count < 1) return;
+
+            foreach (string policyName in containerPermissions.SharedAccessPolicies.Keys)
+            {
+                policyList.Items.Add(policyName);
+            }
+
+        }
+
+        // Enumerate the blobs in a selected container and populate the blobs listbox
         private void listBlobs()
         {
             if (containerList.SelectedItem == null) return;
             containerName = containerList.SelectedItem.ToString();
 
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+
             // now list blobs for this container
             // retrieve reference to a previously created container
-            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
 
             // display the name of each blob in the container (could be block or page blobs)
             blobList.Items.Clear();
@@ -443,6 +470,109 @@ namespace AzureBlobLease
             keyText.Text = accountKey;
             
             listContainers();
+        }
+
+        // get the SAS for a selected container policy
+        private void getSASButton_Click(object sender, EventArgs e)
+        {
+            // get the highlighted policy
+            if (policyList.SelectedItem == null) 
+            {
+                MessageBox.Show("No policy selected.", "No policy");
+                return;
+            }
+
+            policyName = policyList.SelectedItem.ToString();
+            containerName = containerList.SelectedItem.ToString();
+
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+            BlobContainerPermissions containerPermissions = container.GetPermissions();
+            
+            string sas = container.GetSharedAccessSignature(new Microsoft.WindowsAzure.Storage.Blob.SharedAccessBlobPolicy(), policyName);
+            Clipboard.SetText(sas, TextDataFormat.Text);
+            MessageBox.Show("SAS: \"" + sas + "\" copied to clipboard.", "Container SAS");
+        }
+
+        // create a new policy for the highlighted container
+        private void newPolicyButton_Click(object sender, EventArgs e)
+        {
+            // check policy name has been entered
+            if (newPolicyText.Text == null || newPolicyText.Text.StartsWith("<"))
+            {
+                MessageBox.Show("Enter a value for the new policy first.", "No policy");
+                return;
+            }
+            string newPolicy = newPolicyText.Text;
+
+            // check container name is highlighted
+            if (containerList.SelectedItem == null)
+            {
+                MessageBox.Show("No container selected.", "No container");
+                return;
+            }
+            containerName = containerList.SelectedItem.ToString();
+
+            if (blobClient == null)
+            {
+                MessageBox.Show("Connect to your storage account first.", "No connection");
+                return;
+            }
+
+            // get the container reference
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+
+            BlobContainerPermissions containerPermissions = container.GetPermissions();
+            containerPermissions.SharedAccessPolicies.Add(newPolicy, new Microsoft.WindowsAzure.Storage.Blob.SharedAccessBlobPolicy()
+            {
+                SharedAccessStartTime = DateTime.Now.AddMinutes(-5),
+                SharedAccessExpiryTime = DateTime.Now.AddYears(2),
+                Permissions = Microsoft.WindowsAzure.Storage.Blob.SharedAccessBlobPermissions.Write | Microsoft.WindowsAzure.Storage.Blob.SharedAccessBlobPermissions.Read |
+                          Microsoft.WindowsAzure.Storage.Blob.SharedAccessBlobPermissions.List | Microsoft.WindowsAzure.Storage.Blob.SharedAccessBlobPermissions.Delete
+            });
+            container.SetPermissions(containerPermissions);
+
+            // redisplay the container policies
+            listContainerPolicies();
+        }
+
+        private void newPolicyText_MouseClick(object sender, MouseEventArgs e)
+        {
+            newPolicyText.SelectAll();
+        }
+
+        private void deletePolicyButton_Click(object sender, EventArgs e)
+        {
+
+            // check policy name is highlighted
+            if (policyList.SelectedItem == null)
+            {
+                MessageBox.Show("No policy selected.", "No policy");
+                return;
+            }
+
+            policyName = policyList.SelectedItem.ToString();
+            containerName = containerList.SelectedItem.ToString();
+
+            if (blobClient == null)
+            {
+                MessageBox.Show("Connect to your storage account first.", "No connection");
+                return;
+            }
+
+            // confirm user really wants to do this
+            DialogResult answer = MessageBox.Show("Are you sure you want to delete policy: "
+                + policyName + "?", "Confirm Delete", MessageBoxButtons.YesNo);
+            if (answer.Equals(DialogResult.No)) return;
+
+            // get the container reference
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+            BlobContainerPermissions containerPermissions = container.GetPermissions();
+
+            containerPermissions.SharedAccessPolicies.Remove(policyName);
+            container.SetPermissions(containerPermissions);
+
+            // redisplay the container policies
+            listContainerPolicies();
         }
     }
 }

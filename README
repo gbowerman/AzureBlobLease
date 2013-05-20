@@ -4,3 +4,15 @@ Simple Windows tool to manage Azure storage blobs and leases.
 
 - Works with page and block blobs.
 - Create and release leases on blobs.
+- create/delete Azure storage container policies
+- Retrieve container Shared Access Signature (SAS)
+
+Update history
+--------------
+
+5/20/13
+Added support for creating/deleting container policies, and getting container SAS.
+
+
+
+
