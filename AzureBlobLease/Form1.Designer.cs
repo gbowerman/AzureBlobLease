@@ -57,6 +57,7 @@
             this.accountText = new System.Windows.Forms.TextBox();
             this.accountLabel = new System.Windows.Forms.Label();
             this.storageLabel = new System.Windows.Forms.Label();
+            this.deleteAccountBtn = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.storageTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
@@ -326,6 +327,7 @@
             // settingsTab
             // 
             this.settingsTab.BackColor = System.Drawing.Color.AliceBlue;
+            this.settingsTab.Controls.Add(this.deleteAccountBtn);
             this.settingsTab.Controls.Add(this.accountList);
             this.settingsTab.Controls.Add(this.saveStorageAccButton);
             this.settingsTab.Controls.Add(this.keyText);
@@ -355,14 +357,15 @@
             // 
             // saveStorageAccButton
             // 
+            this.saveStorageAccButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.saveStorageAccButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveStorageAccButton.Location = new System.Drawing.Point(173, 6);
+            this.saveStorageAccButton.Location = new System.Drawing.Point(173, 8);
             this.saveStorageAccButton.Margin = new System.Windows.Forms.Padding(2);
             this.saveStorageAccButton.Name = "saveStorageAccButton";
             this.saveStorageAccButton.Size = new System.Drawing.Size(50, 19);
             this.saveStorageAccButton.TabIndex = 12;
             this.saveStorageAccButton.Text = "Save";
-            this.saveStorageAccButton.UseVisualStyleBackColor = true;
+            this.saveStorageAccButton.UseVisualStyleBackColor = false;
             this.saveStorageAccButton.Click += new System.EventHandler(this.saveStorageAccButton_Click);
             // 
             // keyText
@@ -416,6 +419,18 @@
             this.storageLabel.Size = new System.Drawing.Size(83, 13);
             this.storageLabel.TabIndex = 1;
             this.storageLabel.Text = "Storage Account";
+            // 
+            // deleteAccountBtn
+            // 
+            this.deleteAccountBtn.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.deleteAccountBtn.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteAccountBtn.Location = new System.Drawing.Point(136, 93);
+            this.deleteAccountBtn.Name = "deleteAccountBtn";
+            this.deleteAccountBtn.Size = new System.Drawing.Size(64, 20);
+            this.deleteAccountBtn.TabIndex = 14;
+            this.deleteAccountBtn.Text = "Delete";
+            this.deleteAccountBtn.UseVisualStyleBackColor = false;
+            this.deleteAccountBtn.Click += new System.EventHandler(this.deleteAccountBtn_Click);
             // 
             // AzureBlob
             // 
@@ -475,6 +490,7 @@
         private System.Windows.Forms.TextBox newPolicyText;
         private System.Windows.Forms.ListBox policyList;
         private System.Windows.Forms.Button deletePolicy;
+        private System.Windows.Forms.Button deleteAccountBtn;
     }
 }
 

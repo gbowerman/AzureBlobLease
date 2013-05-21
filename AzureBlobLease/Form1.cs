@@ -3,10 +3,10 @@
  * 
  * To do: 
  *   Improve display and framing
- *   Add support for container profiles
+ *   Add support for highlighting multiple blobs
  *   
  *   For questions contact: guybo@outlook.com
- *   Last modified: 4/27/13
+ *   Last modified: 5/21/13
  */
 
 using System;
@@ -110,9 +110,21 @@ namespace AzureBlobLease
 
         private void connectStorageButton_Click(object sender, EventArgs e)
         {
+            // clear lists
+            containerList.Items.Clear(); 
+            policyList.Items.Clear();
+            blobList.Items.Clear();
+
             listContainers();
         }
 
+        /* 
+           listContainers():
+           - First connects to a storage account
+           - then lists the containers
+           - then higlights the 1st container,
+             which triggers event handler that does blob and policy enumeration
+         */
         private void listContainers()
         {
             if (accountText.Text.Length > 0 && keyText.Text.Length > 0)
@@ -251,7 +263,17 @@ namespace AzureBlobLease
             // Update the current storage account name
             storageAccNameLabel.Text = "- " + accountName;
 
-            // connect to the storage account
+            // clear any existing listBox entries
+            containerList.Items.Clear();
+            policyList.Items.Clear();
+            blobList.Items.Clear();
+
+            // ask if user wants to connect to the new storage account
+            DialogResult answer = MessageBox.Show("Do you want to connect to the new storage account: "
+    + accountName + "?", "Confirm connect", MessageBoxButtons.YesNo);
+            if (answer.Equals(DialogResult.No)) return;
+            
+            // connect and list containers
             listContainers();
         }
 
@@ -458,7 +480,7 @@ namespace AzureBlobLease
 
         private void accountList_Click(object sender, EventArgs e)
         {
-            // connect to the highlighted storage account in the list
+            // set the highlighted storage account in the list
             if (accountList.SelectedItem == null) return;
 
             accountName = accountList.SelectedItem.ToString();
@@ -469,7 +491,8 @@ namespace AzureBlobLease
             accountKey = keyList[listIndex];
             keyText.Text = accountKey;
             
-            listContainers();
+            // don't automatically connect, to avoid a delay if the credentials are incorrect
+            //listContainers();
         }
 
         // get the SAS for a selected container policy
@@ -573,6 +596,56 @@ namespace AzureBlobLease
 
             // redisplay the container policies
             listContainerPolicies();
+        }
+
+        private void deleteAccountBtn_Click(object sender, EventArgs e)
+        {
+            // check account is highlighted
+            if (accountList.SelectedItem == null)
+            {
+                MessageBox.Show("No account selected.", "No account");
+                return;
+            }
+
+            // confirm user really wants to do this
+            DialogResult answer = MessageBox.Show("Are you sure you want to delete storage account: "
+                + accountName + "?", "Confirm Delete", MessageBoxButtons.YesNo);
+            if (answer.Equals(DialogResult.No)) return;
+
+            // Since account was highlighted, accountName and accountKey will have been 
+            //  assigned the values to delete by the accountList Click event handler
+          
+            // delete account
+            // work out the name to the keys in the config file
+            int accNumber = accountList.SelectedIndex;
+            string accKeyName = "Account" + accNumber;
+            string keyKeyName = "Key" + accNumber;
+
+            System.Configuration.Configuration cfg =
+                ConfigurationManager.OpenExeConfiguration(configFile);
+            cfg.AppSettings.Settings.Remove(accKeyName);
+            cfg.AppSettings.Settings.Remove(keyKeyName);
+
+            // Save the configuration file.
+            cfg.Save(ConfigurationSaveMode.Full, true);
+
+            // remove it from the account list box
+            accountList.Items.Remove(accountName);
+
+            // remove it from the key list
+            keyList.Remove(keyText.Text);
+
+            // clear the account name and key texts
+            accountText.Clear();
+            keyText.Clear();
+
+            // clear listBoxes
+            containerList.Items.Clear();
+            policyList.Items.Clear();
+            blobList.Items.Clear();
+
+            // confirmation dialog
+            MessageBox.Show("Account deleted", "Success");
         }
     }
 }
