@@ -231,7 +231,7 @@ namespace AzureBlobLease
 
             if (accountText.Text.Length < 1 || keyText.Text.Length < 1)
             {
-                MessageBox.Show("You need to enter an account and key in order to save.", "Nothing to save");
+                MessageBox.Show("You need to enter an account name and key in order to save.", "Nothing to save");
                 return;
             }
             else accountName = accountText.Text;
@@ -344,7 +344,7 @@ namespace AzureBlobLease
         {
             if (newContainerText.Text == null || newContainerText.Text.StartsWith("<"))
             {
-                MessageBox.Show("Enter a value for the new container first.", "No container");
+                MessageBox.Show("Enter a name for the new container first.", "No container");
                 return;
             }
 
@@ -512,6 +512,8 @@ namespace AzureBlobLease
             BlobContainerPermissions containerPermissions = container.GetPermissions();
             
             string sas = container.GetSharedAccessSignature(new Microsoft.WindowsAzure.Storage.Blob.SharedAccessBlobPolicy(), policyName);
+            // compensate for a bug in GetSharedAccessSignature that returns the SAS with a leading '?'
+            sas = sas.TrimStart('?');
             Clipboard.SetText(sas, TextDataFormat.Text);
             MessageBox.Show("SAS: \"" + sas + "\" copied to clipboard.", "Container SAS");
         }
@@ -522,7 +524,7 @@ namespace AzureBlobLease
             // check policy name has been entered
             if (newPolicyText.Text == null || newPolicyText.Text.StartsWith("<"))
             {
-                MessageBox.Show("Enter a value for the new policy first.", "No policy");
+                MessageBox.Show("Enter a name for the new policy first.", "No policy");
                 return;
             }
             string newPolicy = newPolicyText.Text;
