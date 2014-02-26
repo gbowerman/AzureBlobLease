@@ -17,8 +17,6 @@ using System.IO;
 using System.Configuration;
 using System.Collections.Generic;
 
-
-
 namespace AzureBlobLease
 {
     public partial class AzureBlob : Form
