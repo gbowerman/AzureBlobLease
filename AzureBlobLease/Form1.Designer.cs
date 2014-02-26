@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AzureBlob));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.storageTab = new System.Windows.Forms.TabPage();
             this.deletePolicy = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.containerList = new System.Windows.Forms.ListBox();
             this.storageAccLabel = new System.Windows.Forms.Label();
             this.settingsTab = new System.Windows.Forms.TabPage();
+            this.deleteAccountBtn = new System.Windows.Forms.Button();
             this.accountList = new System.Windows.Forms.ListBox();
             this.saveStorageAccButton = new System.Windows.Forms.Button();
             this.keyText = new System.Windows.Forms.TextBox();
@@ -57,7 +59,6 @@
             this.accountText = new System.Windows.Forms.TextBox();
             this.accountLabel = new System.Windows.Forms.Label();
             this.storageLabel = new System.Windows.Forms.Label();
-            this.deleteAccountBtn = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.storageTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
@@ -65,6 +66,9 @@
             // 
             // tabControl
             // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.storageTab);
             this.tabControl.Controls.Add(this.settingsTab);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -72,7 +76,7 @@
             this.tabControl.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(464, 341);
+            this.tabControl.Size = new System.Drawing.Size(467, 441);
             this.tabControl.TabIndex = 0;
             // 
             // storageTab
@@ -101,15 +105,16 @@
             this.storageTab.Margin = new System.Windows.Forms.Padding(2);
             this.storageTab.Name = "storageTab";
             this.storageTab.Padding = new System.Windows.Forms.Padding(2);
-            this.storageTab.Size = new System.Drawing.Size(456, 315);
+            this.storageTab.Size = new System.Drawing.Size(459, 415);
             this.storageTab.TabIndex = 0;
             this.storageTab.Text = "Storage";
             // 
             // deletePolicy
             // 
+            this.deletePolicy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.deletePolicy.BackColor = System.Drawing.Color.LightSteelBlue;
             this.deletePolicy.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deletePolicy.Location = new System.Drawing.Point(321, 153);
+            this.deletePolicy.Location = new System.Drawing.Point(368, 198);
             this.deletePolicy.Margin = new System.Windows.Forms.Padding(2);
             this.deletePolicy.Name = "deletePolicy";
             this.deletePolicy.Size = new System.Drawing.Size(83, 20);
@@ -120,9 +125,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(213, 39);
+            this.label1.Location = new System.Drawing.Point(232, 39);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 14);
@@ -131,26 +137,30 @@
             // 
             // newPolicyText
             // 
-            this.newPolicyText.Location = new System.Drawing.Point(216, 128);
+            this.newPolicyText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.newPolicyText.Location = new System.Drawing.Point(235, 174);
             this.newPolicyText.Name = "newPolicyText";
-            this.newPolicyText.Size = new System.Drawing.Size(100, 19);
+            this.newPolicyText.Size = new System.Drawing.Size(106, 19);
             this.newPolicyText.TabIndex = 39;
             this.newPolicyText.Text = "<policy name>";
             this.newPolicyText.MouseClick += new System.Windows.Forms.MouseEventHandler(this.newPolicyText_MouseClick);
             // 
             // policyList
             // 
+            this.policyList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.policyList.FormattingEnabled = true;
-            this.policyList.Location = new System.Drawing.Point(216, 56);
+            this.policyList.Location = new System.Drawing.Point(235, 58);
             this.policyList.Name = "policyList";
-            this.policyList.Size = new System.Drawing.Size(203, 69);
+            this.policyList.Size = new System.Drawing.Size(216, 108);
             this.policyList.TabIndex = 38;
             // 
             // getSASButton
             // 
+            this.getSASButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.getSASButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.getSASButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.getSASButton.Location = new System.Drawing.Point(343, 36);
+            this.getSASButton.Location = new System.Drawing.Point(375, 33);
             this.getSASButton.Margin = new System.Windows.Forms.Padding(2);
             this.getSASButton.Name = "getSASButton";
             this.getSASButton.Size = new System.Drawing.Size(76, 20);
@@ -161,9 +171,10 @@
             // 
             // deletePolicyButton
             // 
+            this.deletePolicyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.deletePolicyButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.deletePolicyButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deletePolicyButton.Location = new System.Drawing.Point(321, 128);
+            this.deletePolicyButton.Location = new System.Drawing.Point(368, 174);
             this.deletePolicyButton.Margin = new System.Windows.Forms.Padding(2);
             this.deletePolicyButton.Name = "deletePolicyButton";
             this.deletePolicyButton.Size = new System.Drawing.Size(83, 20);
@@ -174,9 +185,10 @@
             // 
             // breakLeaseButton
             // 
+            this.breakLeaseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.breakLeaseButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.breakLeaseButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.breakLeaseButton.Location = new System.Drawing.Point(192, 288);
+            this.breakLeaseButton.Location = new System.Drawing.Point(192, 386);
             this.breakLeaseButton.Name = "breakLeaseButton";
             this.breakLeaseButton.Size = new System.Drawing.Size(88, 20);
             this.breakLeaseButton.TabIndex = 35;
@@ -186,9 +198,10 @@
             // 
             // acquireLeaseButton
             // 
+            this.acquireLeaseButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.acquireLeaseButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.acquireLeaseButton.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.acquireLeaseButton.Location = new System.Drawing.Point(98, 288);
+            this.acquireLeaseButton.Location = new System.Drawing.Point(98, 386);
             this.acquireLeaseButton.Name = "acquireLeaseButton";
             this.acquireLeaseButton.Size = new System.Drawing.Size(88, 20);
             this.acquireLeaseButton.TabIndex = 34;
@@ -198,20 +211,22 @@
             // 
             // newContainerText
             // 
+            this.newContainerText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.newContainerText.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newContainerText.Location = new System.Drawing.Point(4, 129);
+            this.newContainerText.Location = new System.Drawing.Point(4, 173);
             this.newContainerText.Margin = new System.Windows.Forms.Padding(2);
             this.newContainerText.Name = "newContainerText";
-            this.newContainerText.Size = new System.Drawing.Size(101, 20);
+            this.newContainerText.Size = new System.Drawing.Size(117, 20);
             this.newContainerText.TabIndex = 20;
             this.newContainerText.Text = "<new container>";
             this.newContainerText.MouseClick += new System.Windows.Forms.MouseEventHandler(this.newContainerText_MouseClick);
             // 
             // deleteBlobButton
             // 
+            this.deleteBlobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteBlobButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.deleteBlobButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteBlobButton.Location = new System.Drawing.Point(5, 288);
+            this.deleteBlobButton.Location = new System.Drawing.Point(5, 387);
             this.deleteBlobButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteBlobButton.Name = "deleteBlobButton";
             this.deleteBlobButton.Size = new System.Drawing.Size(88, 20);
@@ -233,10 +248,11 @@
             // 
             // connectStorageButton
             // 
+            this.connectStorageButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.connectStorageButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.connectStorageButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.connectStorageButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connectStorageButton.Location = new System.Drawing.Point(199, 10);
+            this.connectStorageButton.Location = new System.Drawing.Point(200, 10);
             this.connectStorageButton.Margin = new System.Windows.Forms.Padding(2);
             this.connectStorageButton.Name = "connectStorageButton";
             this.connectStorageButton.Size = new System.Drawing.Size(64, 20);
@@ -247,19 +263,22 @@
             // 
             // blobList
             // 
+            this.blobList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.blobList.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.blobList.FormattingEnabled = true;
-            this.blobList.Location = new System.Drawing.Point(4, 202);
+            this.blobList.Location = new System.Drawing.Point(5, 241);
             this.blobList.Margin = new System.Windows.Forms.Padding(2);
             this.blobList.Name = "blobList";
-            this.blobList.Size = new System.Drawing.Size(444, 82);
+            this.blobList.Size = new System.Drawing.Size(447, 134);
             this.blobList.TabIndex = 9;
             // 
             // filesLabel
             // 
+            this.filesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filesLabel.AutoSize = true;
             this.filesLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.filesLabel.Location = new System.Drawing.Point(2, 185);
+            this.filesLabel.Location = new System.Drawing.Point(3, 224);
             this.filesLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.filesLabel.Name = "filesLabel";
             this.filesLabel.Size = new System.Drawing.Size(34, 14);
@@ -268,9 +287,10 @@
             // 
             // deleteContainerButton
             // 
+            this.deleteContainerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteContainerButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.deleteContainerButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteContainerButton.Location = new System.Drawing.Point(109, 153);
+            this.deleteContainerButton.Location = new System.Drawing.Point(125, 199);
             this.deleteContainerButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteContainerButton.Name = "deleteContainerButton";
             this.deleteContainerButton.Size = new System.Drawing.Size(102, 20);
@@ -281,9 +301,10 @@
             // 
             // createContainerButton
             // 
+            this.createContainerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.createContainerButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.createContainerButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createContainerButton.Location = new System.Drawing.Point(109, 129);
+            this.createContainerButton.Location = new System.Drawing.Point(125, 175);
             this.createContainerButton.Margin = new System.Windows.Forms.Padding(2);
             this.createContainerButton.Name = "createContainerButton";
             this.createContainerButton.Size = new System.Drawing.Size(102, 20);
@@ -305,11 +326,14 @@
             // 
             // containerList
             // 
+            this.containerList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.containerList.FormattingEnabled = true;
-            this.containerList.Location = new System.Drawing.Point(4, 56);
+            this.containerList.Location = new System.Drawing.Point(2, 58);
             this.containerList.Margin = new System.Windows.Forms.Padding(2);
             this.containerList.Name = "containerList";
-            this.containerList.Size = new System.Drawing.Size(202, 69);
+            this.containerList.Size = new System.Drawing.Size(223, 108);
             this.containerList.TabIndex = 1;
             this.containerList.SelectedValueChanged += new System.EventHandler(this.containerList_SelectedValueChanged);
             // 
@@ -339,24 +363,41 @@
             this.settingsTab.Margin = new System.Windows.Forms.Padding(2);
             this.settingsTab.Name = "settingsTab";
             this.settingsTab.Padding = new System.Windows.Forms.Padding(2);
-            this.settingsTab.Size = new System.Drawing.Size(456, 315);
+            this.settingsTab.Size = new System.Drawing.Size(459, 415);
             this.settingsTab.TabIndex = 1;
             this.settingsTab.Text = "Accounts";
             // 
+            // deleteAccountBtn
+            // 
+            this.deleteAccountBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteAccountBtn.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.deleteAccountBtn.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteAccountBtn.Location = new System.Drawing.Point(136, 136);
+            this.deleteAccountBtn.Name = "deleteAccountBtn";
+            this.deleteAccountBtn.Size = new System.Drawing.Size(64, 20);
+            this.deleteAccountBtn.TabIndex = 14;
+            this.deleteAccountBtn.Text = "Delete";
+            this.deleteAccountBtn.UseVisualStyleBackColor = false;
+            this.deleteAccountBtn.Click += new System.EventHandler(this.deleteAccountBtn_Click);
+            // 
             // accountList
             // 
+            this.accountList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.accountList.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountList.FormattingEnabled = true;
             this.accountList.Location = new System.Drawing.Point(8, 93);
             this.accountList.Margin = new System.Windows.Forms.Padding(2);
             this.accountList.Name = "accountList";
-            this.accountList.Size = new System.Drawing.Size(122, 95);
+            this.accountList.Size = new System.Drawing.Size(122, 134);
             this.accountList.TabIndex = 13;
             this.accountList.SelectedIndexChanged += new System.EventHandler(this.accountList_Click);
             this.accountList.SelectedValueChanged += new System.EventHandler(this.accountList_SelectedValueChanged);
             // 
             // saveStorageAccButton
             // 
+            this.saveStorageAccButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveStorageAccButton.BackColor = System.Drawing.Color.LightSteelBlue;
             this.saveStorageAccButton.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveStorageAccButton.Location = new System.Drawing.Point(173, 8);
@@ -370,6 +411,8 @@
             // 
             // keyText
             // 
+            this.keyText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.keyText.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.keyText.Location = new System.Drawing.Point(7, 53);
             this.keyText.Margin = new System.Windows.Forms.Padding(2);
@@ -391,6 +434,8 @@
             // 
             // accountText
             // 
+            this.accountText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.accountText.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accountText.Location = new System.Drawing.Point(83, 7);
             this.accountText.Margin = new System.Windows.Forms.Padding(2);
@@ -411,38 +456,28 @@
             // 
             // storageLabel
             // 
+            this.storageLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.storageLabel.AutoSize = true;
             this.storageLabel.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.storageLabel.Location = new System.Drawing.Point(8, 78);
+            this.storageLabel.Location = new System.Drawing.Point(8, 99);
             this.storageLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.storageLabel.Name = "storageLabel";
             this.storageLabel.Size = new System.Drawing.Size(83, 13);
             this.storageLabel.TabIndex = 1;
             this.storageLabel.Text = "Storage Account";
             // 
-            // deleteAccountBtn
-            // 
-            this.deleteAccountBtn.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.deleteAccountBtn.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteAccountBtn.Location = new System.Drawing.Point(136, 93);
-            this.deleteAccountBtn.Name = "deleteAccountBtn";
-            this.deleteAccountBtn.Size = new System.Drawing.Size(64, 20);
-            this.deleteAccountBtn.TabIndex = 14;
-            this.deleteAccountBtn.Text = "Delete";
-            this.deleteAccountBtn.UseVisualStyleBackColor = false;
-            this.deleteAccountBtn.Click += new System.EventHandler(this.deleteAccountBtn_Click);
-            // 
             // AzureBlob
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(468, 342);
+            this.ClientSize = new System.Drawing.Size(471, 442);
             this.Controls.Add(this.tabControl);
             this.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AzureBlob";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Azure blob editor";
             this.Load += new System.EventHandler(this.AzureBlob_Load);
             this.tabControl.ResumeLayout(false);

@@ -10,19 +10,13 @@
  */
 
 using System;
-//using System.ComponentModel;
-//using System.Data;
 using System.Windows.Forms;
-using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
-using Microsoft.WindowsAzure.Storage.Blob.Protocol;
-using Microsoft.WindowsAzure.Storage.Auth;
 using System.IO;
-//using System.Text;
 using System.Configuration;
 using System.Collections.Generic;
-//using System.Collections.Specialized;
+
 
 
 namespace AzureBlobLease
