@@ -199,7 +199,7 @@ namespace AzureBlobLease
 
             // display the name of each blob in the container (could be block or page blobs)
             blobList.Items.Clear();
-            foreach (var blobItem in container.ListBlobs())
+            foreach (var blobItem in container.ListBlobs(null, true))
             {
                 if (blobItem is CloudPageBlob)
                 {
@@ -214,6 +214,13 @@ namespace AzureBlobLease
                     blobList.Items.Add(blobItem.Uri);
                 }
             }
+        }
+
+
+
+        string[] GetBlobListWithPaths()
+        {
+            throw new NotImplementedException();
         }
 
         // Save storage key to a filename determined by account name, in local app storage
