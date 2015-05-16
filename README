@@ -9,14 +9,17 @@ Simple Windows tool to manage Azure storage blobs and leases.
 
 Update history
 --------------
+5/16/15
+Added ability to break an active lease on a container.
+
 5/21/13
-Improved storage account handling
+Improved storage account handling.
 
 5/20/13
 Added support for creating/deleting container policies, and getting container SAS.
 
 2/26/14
-Minor refactoring
+Minor refactoring.
 
 
 
