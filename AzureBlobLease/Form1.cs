@@ -391,7 +391,34 @@ namespace AzureBlobLease
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
             if (container != null)
             {
-                container.Delete();
+                try {
+                    container.Delete();
+                }
+                catch (Exception ex)
+                {
+                    StorageException storageException = ex as StorageException;
+                    // Look at the status code - 412 = active lease  
+                    if (storageException != null && storageException.RequestInformation.HttpStatusCode == 412)
+                    {
+                        DialogResult answer2 =
+                         MessageBox.Show("There is an open lease on this container. Do you want to break the lease and delete it?",
+                          "Confirm Delete", MessageBoxButtons.YesNo);
+                        if (answer2.Equals(DialogResult.No)) return;
+                        try
+                        {
+                            container.BreakLease(TimeSpan.FromSeconds(0));
+                            container.Delete();
+                        }
+                        catch (Exception ex2)
+                        {
+                            MessageBox.Show(ex2.ToString(), "Exception breaking lease " + ex2.GetType().FullName);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.ToString(), ex.GetType().FullName);
+                    }
+                }
             }
             listContainers();
         }
